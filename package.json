@@ -6,11 +6,10 @@
   "scripts": {
     "test": "jest"
   },
-  "keywords": [
-    "react",
-    "namaste",
-    "react"
-  ],
+  "keywords": [],
   "author": "Midun",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.9.3"
+  }
 }
