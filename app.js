@@ -1,41 +1,436 @@
-/* 
-<div id='parent>
-<div id='child">
-<h1>I'm h1</h1>
-</div>
-</div>
-*/
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const parent = React.createElement("div", { id: "parent" }, [
-  React.createElement(
-    "div",
-    {
-      id: "child",
+// const heading = React.createElement("h1", { id: "heading" }, "Namaste React");
+const styleCard = {
+  backgroundColor: "#f0f0f0",
+};
+const Header = () => {
+  return (
+    <div className="header">
+      <div className="logo-container">
+        <img
+          className="logo"
+          src="https://img.freepik.com/free-vector/detailed-chef-logo-template_23-2148986823.jpg"
+        />
+      </div>
+      <div className="nav-items">
+        <ul>
+          <li>Home</li>
+          <li>About Us</li>
+          <li>Contact Us</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+const resList = [
+  {
+    info: {
+      id: "62248",
+      name: "Gokul Oottupura",
+      cloudinaryImageId: "fx2flvzfe1kix1cgoexs",
+      locality: "Palarivattom",
+      areaName: "Edappally",
+      costForTwo: "₹200 for two",
+      cuisines: ["South Indian", "North Indian", "Kerala", "Chinese", "Thalis"],
+      avgRating: 4.3,
+      veg: true,
+      feeDetails: {
+        restaurantId: "62248",
+        fees: [
+          {
+            name: "BASE_DISTANCE",
+            fee: 3000,
+          },
+          {
+            name: "BASE_TIME",
+          },
+          {
+            name: "ANCILLARY_SURGE_FEE",
+          },
+        ],
+        totalFee: 3000,
+      },
+      parentId: "4787",
+      avgRatingString: "4.3",
+      totalRatingsString: "10K+",
+      sla: {
+        deliveryTime: 19,
+        lastMileTravel: 1.8,
+        serviceability: "SERVICEABLE",
+        slaString: "19 mins",
+        lastMileTravelString: "1.8 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2023-09-24 22:00:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "25% OFF",
+        subHeader: "UPTO ₹65",
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
     },
-    [
-      React.createElement("h1", {}, "I'm H1"),
-      React.createElement("h2", {}, "I'm H2"),
-    ]
-  ),
-  React.createElement(
-    "div",
-    {
-      id: "child2",
+    analytics: {},
+    cta: {
+      link: "https://www.swiggy.com/restaurants/gokul-oottupura-palarivattom-edappally-kochi-62248",
+      type: "WEBLINK",
     },
-    [
-      React.createElement("h1", {}, "I'm H1"),
-      React.createElement("h2", {}, "I'm H2"),
-    ]
-  ),
-]);
-
-// const heading = React.createElement(
-//   "h1",
-//   { id: "heading" },
-//   "Hello world react"
-// );
-console.log(parent); // JS Object
+  },
+  {
+    info: {
+      id: "52083",
+      name: "Palaaram",
+      cloudinaryImageId: "zchpuqit7k4pdndgse4t",
+      locality: "Thrikkakara",
+      areaName: "Kakkanad",
+      costForTwo: "₹400 for two",
+      cuisines: ["Kerala", "Biryani", "North Indian", "Arabian", "Chinese"],
+      avgRating: 4.2,
+      feeDetails: {
+        restaurantId: "52083",
+        fees: [
+          {
+            name: "BASE_DISTANCE",
+            fee: 5800,
+          },
+          {
+            name: "BASE_TIME",
+          },
+          {
+            name: "ANCILLARY_SURGE_FEE",
+          },
+        ],
+        totalFee: 5800,
+      },
+      parentId: "18945",
+      avgRatingString: "4.2",
+      totalRatingsString: "10K+",
+      sla: {
+        deliveryTime: 27,
+        lastMileTravel: 5,
+        serviceability: "SERVICEABLE",
+        slaString: "27 mins",
+        lastMileTravelString: "5.0 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2023-09-24 23:00:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "30% OFF",
+        subHeader: "UPTO ₹75",
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {},
+    cta: {
+      link: "https://www.swiggy.com/restaurants/palaaram-thrikkakara-kakkanad-kochi-52083",
+      type: "WEBLINK",
+    },
+  },
+  {
+    info: {
+      id: "59500",
+      name: "Chiyang",
+      cloudinaryImageId: "mlku39zllyuo2dcozzul",
+      locality: "Mariyambika",
+      areaName: "Kaloor",
+      costForTwo: "₹400 for two",
+      cuisines: ["Chinese"],
+      avgRating: 4.1,
+      feeDetails: {
+        restaurantId: "59500",
+        fees: [
+          {
+            name: "BASE_DISTANCE",
+            fee: 6000,
+          },
+          {
+            name: "BASE_TIME",
+          },
+          {
+            name: "ANCILLARY_SURGE_FEE",
+          },
+        ],
+        totalFee: 6000,
+      },
+      parentId: "5445",
+      avgRatingString: "4.1",
+      totalRatingsString: "10K+",
+      sla: {
+        deliveryTime: 25,
+        lastMileTravel: 5,
+        serviceability: "SERVICEABLE",
+        slaString: "25 mins",
+        lastMileTravelString: "5.0 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2023-09-24 22:00:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "FREE ITEM",
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {},
+    cta: {
+      link: "https://www.swiggy.com/restaurants/chiyang-mariyambika-kaloor-kochi-59500",
+      type: "WEBLINK",
+    },
+  },
+  {
+    info: {
+      id: "52870",
+      name: "Al Sheba KuzhiMandhi",
+      cloudinaryImageId: "56b7222d3239a954d09b42c05347debf",
+      locality: "Thrikkakara",
+      areaName: "Kakkanad",
+      costForTwo: "₹250 for two",
+      cuisines: ["Arabian", "Beverages"],
+      avgRating: 4.1,
+      feeDetails: {
+        restaurantId: "52870",
+        fees: [
+          {
+            name: "BASE_DISTANCE",
+            fee: 4100,
+          },
+          {
+            name: "BASE_TIME",
+          },
+          {
+            name: "ANCILLARY_SURGE_FEE",
+          },
+        ],
+        totalFee: 4100,
+      },
+      parentId: "29485",
+      avgRatingString: "4.1",
+      totalRatingsString: "10K+",
+      sla: {
+        deliveryTime: 22,
+        lastMileTravel: 4.6,
+        serviceability: "SERVICEABLE",
+        slaString: "22 mins",
+        lastMileTravelString: "4.6 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2023-09-24 23:45:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "10% OFF",
+        subHeader: "UPTO ₹40",
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {},
+    cta: {
+      link: "https://www.swiggy.com/restaurants/al-sheba-kuzhimandhi-thrikkakara-kakkanad-kochi-52870",
+      type: "WEBLINK",
+    },
+  },
+  {
+    info: {
+      id: "53400",
+      name: "Domino's Pizza",
+      cloudinaryImageId: "yuvc4lp1galgpfjrzjzw",
+      locality: "Sonia Nagar",
+      areaName: "Palarivattom",
+      costForTwo: "₹400 for two",
+      cuisines: ["Pizzas", "Italian", "Pastas", "Desserts"],
+      avgRating: 4.5,
+      feeDetails: {
+        restaurantId: "53400",
+        fees: [
+          {
+            name: "BASE_DISTANCE",
+            fee: 3000,
+          },
+          {
+            name: "BASE_TIME",
+          },
+          {
+            name: "ANCILLARY_SURGE_FEE",
+          },
+        ],
+        totalFee: 3000,
+      },
+      parentId: "2456",
+      avgRatingString: "4.5",
+      totalRatingsString: "10K+",
+      sla: {
+        deliveryTime: 25,
+        serviceability: "SERVICEABLE",
+        slaString: "25 mins",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2023-09-24 22:55:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "₹150 OFF",
+        subHeader: "ABOVE ₹999",
+        discountTag: "FLAT DEAL",
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {},
+    cta: {
+      link: "https://www.swiggy.com/restaurants/dominos-pizza-sonia-nagar-palarivattom-kochi-53400",
+      type: "WEBLINK",
+    },
+  },
+];
+const RestaurantCard = (props) => {
+  const { resData } = props;
+  const { name, cuisines, avgRating } = resData.info;
+  const { deliveryTime } = resData.info.sla;
+  return (
+    <div className="res-card" style={styleCard}>
+      <img
+        className="res-logo"
+        alt="res-logo"
+        src={
+          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
+          resData.info.cloudinaryImageId
+        }
+      />
+      <h3>{name}</h3>
+      <h4>{cuisines.join(", ")}</h4>
+      <h5>{avgRating}</h5>
+      <h5>{deliveryTime} minutes</h5>
+    </div>
+  );
+};
+const Body = () => {
+  return (
+    <div className="body">
+      <div className="search">Search</div>
+      <div className="res-container">
+        {resList.map((item) => (
+          <RestaurantCard key={item.info.id} resData={item} />
+        ))}
+      </div>
+    </div>
+  );
+};
+const AppLayout = () => {
+  return (
+    <div className="app">
+      <Header />
+      <Body />
+    </div>
+  );
+};
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(parent);
+
+root.render(<AppLayout />);
