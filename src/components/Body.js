@@ -1,179 +1,94 @@
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utils/mockData";
+import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
+import { SEAFOOD_ID } from "../utils/constants";
 const Body = () => {
-  let mockList = [
-    {
-      info: {
-        id: "62248",
-        name: "Gokul Oottupura",
-        cloudinaryImageId: "fx2flvzfe1kix1cgoexs",
-        locality: "Palarivattom",
-        areaName: "Edappally",
-        costForTwo: "₹200 for two",
-        cuisines: [
-          "South Indian",
-          "North Indian",
-          "Kerala",
-          "Chinese",
-          "Thalis",
-        ],
-        avgRating: 4.3,
-        veg: true,
-        feeDetails: {
-          restaurantId: "62248",
-          fees: [
-            {
-              name: "BASE_DISTANCE",
-              fee: 3000,
-            },
-            {
-              name: "BASE_TIME",
-            },
-            {
-              name: "ANCILLARY_SURGE_FEE",
-            },
-          ],
-          totalFee: 3000,
-        },
-        parentId: "4787",
-        avgRatingString: "4.3",
-        totalRatingsString: "10K+",
-        sla: {
-          deliveryTime: 19,
-          lastMileTravel: 1.8,
-          serviceability: "SERVICEABLE",
-          slaString: "19 mins",
-          lastMileTravelString: "1.8 km",
-          iconType: "ICON_TYPE_EMPTY",
-        },
-        availability: {
-          nextCloseTime: "2023-09-24 22:00:00",
-          opened: true,
-        },
-        badges: {},
-        isOpen: true,
-        type: "F",
-        badgesV2: {
-          entityBadges: {
-            imageBased: {},
-            textBased: {},
-            textExtendedBadges: {},
-          },
-        },
-        aggregatedDiscountInfoV3: {
-          header: "25% OFF",
-          subHeader: "UPTO ₹65",
-        },
-        differentiatedUi: {
-          displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
-          differentiatedUiMediaDetails: {
-            mediaType: "ADS_MEDIA_ENUM_IMAGE",
-            lottie: {},
-            video: {},
-          },
-        },
-        reviewsSummary: {},
-        displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
-        restaurantOfferPresentationInfo: {},
-      },
-      analytics: {},
-      cta: {
-        link: "https://www.swiggy.com/restaurants/gokul-oottupura-palarivattom-edappally-kochi-62248",
-        type: "WEBLINK",
-      },
-    },
-    {
-      info: {
-        id: "52083",
-        name: "Palaaram",
-        cloudinaryImageId: "zchpuqit7k4pdndgse4t",
-        locality: "Thrikkakara",
-        areaName: "Kakkanad",
-        costForTwo: "₹400 for two",
-        cuisines: ["Kerala", "Biryani", "North Indian", "Arabian", "Chinese"],
-        avgRating: 4.2,
-        feeDetails: {
-          restaurantId: "52083",
-          fees: [
-            {
-              name: "BASE_DISTANCE",
-              fee: 5800,
-            },
-            {
-              name: "BASE_TIME",
-            },
-            {
-              name: "ANCILLARY_SURGE_FEE",
-            },
-          ],
-          totalFee: 5800,
-        },
-        parentId: "18945",
-        avgRatingString: "4.2",
-        totalRatingsString: "10K+",
-        sla: {
-          deliveryTime: 27,
-          lastMileTravel: 5,
-          serviceability: "SERVICEABLE",
-          slaString: "27 mins",
-          lastMileTravelString: "5.0 km",
-          iconType: "ICON_TYPE_EMPTY",
-        },
-        availability: {
-          nextCloseTime: "2023-09-24 23:00:00",
-          opened: true,
-        },
-        badges: {},
-        isOpen: true,
-        type: "F",
-        badgesV2: {
-          entityBadges: {
-            imageBased: {},
-            textBased: {},
-            textExtendedBadges: {},
-          },
-        },
-        aggregatedDiscountInfoV3: {
-          header: "30% OFF",
-          subHeader: "UPTO ₹75",
-        },
-        differentiatedUi: {
-          displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
-          differentiatedUiMediaDetails: {
-            mediaType: "ADS_MEDIA_ENUM_IMAGE",
-            lottie: {},
-            video: {},
-          },
-        },
-        reviewsSummary: {},
-        displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
-        restaurantOfferPresentationInfo: {},
-      },
-      analytics: {},
-      cta: {
-        link: "https://www.swiggy.com/restaurants/palaaram-thrikkakara-kakkanad-kochi-52083",
-        type: "WEBLINK",
-      },
-    },
-  ];
-  return (
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [filteredListOfRestaurants, setFilteredListOfRestaurants] = useState(
+    []
+  );
+  const [searchText, setSearchText] = useState("");
+  const URL =
+    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=10.0088384&lng=76.3159664&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+
+  console.log("body rendered");
+
+  useEffect(() => {
+    // fetch(URL, { mode: "cors" }).then((res) => {
+    //   console.log(res);
+    // });
+    fetchData();
+  }, []);
+
+  let resId;
+
+  const fetchData = async () => {
+    const data = await fetch(URL);
+
+    const json = await data.json();
+    const arrayOfCards = json.data.cards;
+    const restaurant_list = "restaurant_grid_listing";
+
+    for (const cardObj of arrayOfCards) {
+      if (cardObj.card.card && cardObj.card.card.id === restaurant_list) {
+        const resData =
+          cardObj.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        setListOfRestaurants(resData);
+        setFilteredListOfRestaurants(resData);
+      }
+    }
+  };
+
+  return filteredListOfRestaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
+        <div className="search">
+          <input
+            type="text"
+            className="search-box"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              let mockList = listOfRestaurants.filter((res) => {
+                return res.info.name
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase());
+              });
+              setFilteredListOfRestaurants(mockList);
+            }}
+          >
+            Search
+          </button>
+        </div>
         <button
           className="filter-btn"
           onClick={() => {
             //filter logic
-            mockList = mockList.filter((res) => res.info.avgRating > 4.2);
-            console.log(mockList);
+            let mockList = listOfRestaurants.filter(
+              (res) => res.info.avgRating > 4.2
+            );
+            setFilteredListOfRestaurants(mockList);
           }}
         >
           Top rated restaurants
         </button>
       </div>
       <div className="res-container">
-        {mockList.map((item) => (
-          <RestaurantCard key={item.info.id} resData={item} />
-        ))}
+        {filteredListOfRestaurants.map((item) => {
+          resId =
+            SEAFOOD_ID[
+              Math.floor(Math.random() * filteredListOfRestaurants.length)
+            ];
+          return (
+            <RestaurantCard key={item.info.id} resData={item} resId={resId} />
+          );
+        })}
       </div>
     </div>
   );
