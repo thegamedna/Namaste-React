@@ -1,8 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const User = ({ name }) => {
   const [count, setCount] = useState(0);
+
+  useEffect(() => {}, []);
+
   return (
     <div className="user-card">
       <h2>name: {name}</h2>

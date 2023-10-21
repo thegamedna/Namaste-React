@@ -4,13 +4,29 @@ class UserClass extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userInfo: {
+        name: "Dummy",
+        location: "Default",
+      },
+
       count: 1,
       state: "Arunachal",
     };
   }
+
+  async componentDidMount() {
+    const data = await fetch("https://api.github.com/users/thegamedna");
+    const json = await data.json();
+    console.log(json);
+    this.setState({
+      userInfo: json,
+    });
+  }
   render() {
-    const { name, location } = this.props;
+    // const { name, location } = this.props;
     const { count, state } = this.state;
+    const { name, location } = this.state.userInfo;
+    console.log(this.state.userInfo);
     return (
       <div className="user-card">
         <button

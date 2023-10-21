@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { SEAFOOD_ID } from "../utils/constants";
+import useOnlineStatus from "../utils/useOnlineStatus";
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredListOfRestaurants, setFilteredListOfRestaurants] = useState(
@@ -11,15 +12,16 @@ const Body = () => {
   const URL =
     "https://www.swiggy.com/dapi/restaurants/list/v5?lat=10.0088384&lng=76.3159664&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
-  console.log("body rendered");
-
   useEffect(() => {
     // fetch(URL, { mode: "cors" }).then((res) => {
     //   console.log(res);
     // });
     fetchData();
   }, []);
-
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false) {
+    return <h1>You are offline.</h1>;
+  }
   let resId;
 
   const fetchData = async () => {
