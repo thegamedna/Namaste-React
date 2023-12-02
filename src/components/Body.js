@@ -1,8 +1,9 @@
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { SEAFOOD_ID } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredListOfRestaurants, setFilteredListOfRestaurants] = useState(
@@ -11,6 +12,8 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const URL =
     "https://www.swiggy.com/dapi/restaurants/list/v5?lat=10.0088384&lng=76.3159664&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+
+  const { setuserName, loggedInUser } = useContext(UserContext);
 
   useEffect(() => {
     // fetch(URL, { mode: "cors" }).then((res) => {
@@ -85,6 +88,12 @@ const Body = () => {
             Top rated restaurants
           </button>
         </div>
+        <input
+          value={loggedInUser}
+          onChange={(e) => setuserName(e.target.value)}
+          type="text"
+          className="border border-solid border-black h-100"
+        />
       </div>
       <div className="flex flex-wrap rounded-lg">
         {filteredListOfRestaurants.map((item, index) => {

@@ -3,34 +3,28 @@ import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import { SEAFOOD_API } from "../utils/constants";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantMenuList from "./RestaurantMenuList";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
-  const resInfo = useRestaurantMenu(resId);
-  if (resInfo === null) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const resData = useRestaurantMenu(resId);
+
+  useEffect(() => {
+    console.log(resData);
+    if (resData[0]?.meals?.length > 0) {
+      console.log("abcd");
+      setIsLoaded(true);
+    }
+  }, [resData]);
+
+  if (!isLoaded) {
     return <Shimmer />;
   }
 
   return (
-    <div className="menu">
-      <h1>Name</h1>
-      <h2>Menu</h2>
-      {resInfo
-        .filter((item) => {
-          return item.idMeal === resId;
-        })
-        .map((item) => {
-          return (
-            <>
-              {" "}
-              <ul key={item.idMeal}>
-                <li>{item.idMeal}</li>
-                <li>{item.strMeal}</li>
-                <li>{item.strMealThumb}</li>
-              </ul>
-            </>
-          );
-        })}
+    <div>
+      {isLoaded && <RestaurantMenuList resData={resData} resId={resId} />}
     </div>
   );
 };
